@@ -1,7 +1,7 @@
 "use client"
 
 import { usePathname } from "next/navigation"
-import SiteHeader from "./SiteHeader";
+import {SiteHeader} from "./SiteHeader";
 
 const AppShell = ({children}:{children:React.ReactNode}) =>{
     const pathname = usePathname();

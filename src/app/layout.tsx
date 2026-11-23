@@ -9,9 +9,10 @@ import "./globals.css";
 import { cn } from "@/lib/utils";
 import { TooltipPortal, TooltipProvider } from "radix-ui/tooltip";
 import { Toaster } from "sonner";
-import AppShell from "@/components/ui/AppShell";
+import AppShell from "@/components/AppShell";
 import { ClerkProvider } from "@clerk/nextjs";
 import {dark} from "@clerk/ui/themes";
+import { UpgradeDialogProvider } from "@/components/UpgradeDialog";
 
 const inter = Inter({ subsets: ['latin'], variable: '--font-sans' });
 
@@ -70,9 +71,12 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
         <body className="min-h-full flex flex-col">
 
           <TooltipProvider>
-            <AppShell>
-              {children}
-            </AppShell>
+            <UpgradeDialogProvider>
+              <AppShell>
+                {children}
+              </AppShell>
+            </UpgradeDialogProvider>
+          
           </TooltipProvider>
           <Toaster richColors />
         </body>
