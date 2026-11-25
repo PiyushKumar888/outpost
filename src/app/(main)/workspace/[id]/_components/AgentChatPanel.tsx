@@ -34,12 +34,12 @@ export function AgentChatPanel({ chat, isReady }: { chat: WorkspaceAgentChat; is
     // only the handle and the chat itself take them. Sizes are in px.
     <div className="pointer-events-none fixed inset-x-0 top-14 bottom-0 z-30">
       <ResizablePanelGroup orientation="horizontal">
-        <ResizablePanel />
+        <ResizablePanel   />
         <ResizableHandle className="pointer-events-auto" />
         <ResizablePanel
-          defaultSize={360}
-          minSize={280}
-          maxSize={640}
+           defaultSize={360}
+            minSize={280}
+            maxSize={640}
           className="pointer-events-auto flex flex-col border-l border-white/10 bg-card shadow-2xl"
         >
           <div className="flex h-14 shrink-0 items-center gap-2 border-b border-white/6 px-4 text-sm font-medium">

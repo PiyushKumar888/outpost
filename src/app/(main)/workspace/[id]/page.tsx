@@ -124,7 +124,7 @@ export default async function WorkspacePage({
           )}
           {showDoc && showCanvas && <ResizableHandle withHandle />}
           {showCanvas && (
-            <ResizablePanel defaultSize={75} minSize={20}>
+            <ResizablePanel defaultSize={65} minSize={20}>
               <CanvasEditor
                 workspaceId={id}
                 initialSnapshot={workspace.canvas?.content as TLEditorSnapshot | null}
