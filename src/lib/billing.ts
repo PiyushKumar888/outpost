@@ -27,6 +27,7 @@ export async function getEntitlements(ownerId: string) {
   const clerk = await clerkClient();
   const isOrg = ownerId.startsWith("org_");
   const features = new Set<string>();
+  const featureNames = new Set<string>();
 
   try {
     const subscription = isOrg
@@ -35,7 +36,10 @@ export async function getEntitlements(ownerId: string) {
     for (const item of subscription.subscriptionItems) {
       // past_due keeps access while Clerk retries the payment.
       if (item.status === "active" || item.status === "past_due") {
-        item.plan?.features.forEach((feature) => features.add(feature.slug));
+        item.plan?.features.forEach((feature) => {
+          features.add(feature.slug);
+          featureNames.add(feature.name.trim().toLowerCase());
+        });
       }
     }
   } catch {
@@ -56,7 +60,7 @@ export async function getEntitlements(ownerId: string) {
     isPaid: !!paid,
     promptLimit,
     unlimitedWorkspaces: features.has("unlimited_workspaces"),
-    publicSharing: features.has("public_sharing"),
+    publicSharing: features.has("public_sharing") || featureNames.has("public share links"),
     pdfExport: features.has("pdf_export"),
   };
 }

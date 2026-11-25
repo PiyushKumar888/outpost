@@ -9,7 +9,7 @@ import { Button } from "@/components/ui/button";
 import { MicButton } from "../../../../components/MicButton";
 import { useUpgradeDialog } from "@/components/UpgradeDialog";
 import { UPGRADE_REASONS } from "@/lib/plan-limits";
-import { submitOnEnter } from "../../../../lib/submitOnEnter";
+import { submitOnEnter } from "../../../../lib/utils";
 
 const MAX_NAME_LENGTH = 48;
 

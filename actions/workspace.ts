@@ -94,7 +94,7 @@ export async function deleteWorkspace(workspaceId: string) {
   });
   const isCreator = workspace.creator.clerkId === userId;
   // orgRole describes the active org only, so it counts only for a workspace in that org.
-  const isOrgAdmin = orgRole === "org:admin" && workspace.clerkOrgId === orgId;
+  const isOrgAdmin = orgRole === "org:admin" && workspace.clerksOrgId === orgId;
   if (!isCreator && !isOrgAdmin) {
     throw new Error("Only the creator or an org admin can delete this workspace");
   }
