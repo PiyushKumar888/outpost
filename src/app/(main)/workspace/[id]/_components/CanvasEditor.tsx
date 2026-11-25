@@ -115,7 +115,23 @@ export function CanvasEditor({
   }, [userId, userName]);
 
   // The Postgres autosave below also re-seeds a room that starts empty.
-  const store = useCanvasSync({ roomId: `outpost-${workspaceId}`, users });
+  const sync = useCanvasSync({ roomId: `outpost-${workspaceId}`, users });
+
+  if (sync.status === "loading") {
+    return (
+      <div className="flex h-full items-center justify-center text-sm text-muted-foreground">
+        Connecting to canvas...
+      </div>
+    );
+  }
+
+  if (sync.status === "error") {
+    return (
+      <div className="flex h-full items-center justify-center p-6 text-center text-sm text-destructive">
+        Canvas connection failed: {sync.error.message}
+      </div>
+    );
+  }
 
   const handleMount = (editor: Editor) => {
     setCanvasEditor(editor);
@@ -162,7 +178,7 @@ export function CanvasEditor({
     // The toolbar moves up into the space left by the hidden page menu (! beats tldraw.css).
     <div className="isolate h-full [&_.tlui-main-toolbar--vertical]:top-4!">
       <Tldraw
-        store={store}
+        store={sync.store}
         user={currentUser}
         onMount={handleMount}
         components={components}

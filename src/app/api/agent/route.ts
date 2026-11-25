@@ -77,6 +77,9 @@ export async function POST(req: Request) {
     onFinish: async () => {
       if (ownerId) await recordPrompt(ownerId, user.id, workspaceId);
     },
+    onError: ({ error }) => {
+      console.error("Workspace agent request failed:", error);
+    },
   });
 
   return result.toUIMessageStreamResponse({ sendReasoning: true });

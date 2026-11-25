@@ -13,13 +13,27 @@ import { useWorkspaceAgentChat } from "../../../../../../hooks/use-workspace-age
 // page.tsx is a server component, so this is the button plus the panel it toggles. The chat
 // itself is created here (not inside AgentChatPanel) and kept mounted even while closed, so
 // closing/reopening the panel doesn't wipe the conversation.
-export function AgentToggleButton({ workspaceId, initialPrompt }: { workspaceId: string; initialPrompt?: string }) {
+export function AgentToggleButton({
+  workspaceId,
+  view,
+  initialPrompt,
+}: {
+  workspaceId: string;
+  view: "doc" | "canvas" | "both";
+  initialPrompt?: string;
+}) {
   const [isOpen, setIsOpen] = useState(!!initialPrompt);
   const { canvasEditor, docEditor } = useWorkspaceEditors();
   const chat = useWorkspaceAgentChat(workspaceId, { canvasEditor, docEditor });
   const router = useRouter();
   const pathname = usePathname();
   const promptSent = useRef(false);
+  const isReady =
+    view === "both"
+      ? !!canvasEditor && !!docEditor
+      : view === "canvas"
+        ? !!canvasEditor
+        : !!docEditor;
 
   // A prompt from the dashboard is sent once both editors are ready, so the agent sees both
   // surfaces. It's then dropped from the URL so a refresh doesn't send it again.
@@ -45,7 +59,7 @@ export function AgentToggleButton({ workspaceId, initialPrompt }: { workspaceId:
           </>
         )}
       </Button>
-      {isOpen && <AgentChatPanel chat={chat} isReady={!!canvasEditor || !!docEditor} />}
+      {isOpen && <AgentChatPanel chat={chat} isReady={isReady} />}
     </>
   );
 }

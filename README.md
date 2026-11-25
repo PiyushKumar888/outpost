@@ -74,7 +74,7 @@ Use it to sketch an architecture, map a workflow, design an ERD, draft a plan, o
 
 ## 🌐 Live app & demo
 
-- **Live app:** Coming soon — add your deployed URL here after launch.
+- **Live app:** outpost-seven-xi.vercel.app
 - **Demo video:** Coming soon — add your YouTube, Loom, or other video link here.
 
 > **When ready:** Replace the two lines above with links, for example `[Open Outpost](https://your-deployed-domain.com)` and `[Watch the demo](https://your-video-link)`.

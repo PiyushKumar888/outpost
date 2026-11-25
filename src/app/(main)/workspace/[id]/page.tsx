@@ -100,7 +100,11 @@ export default async function WorkspacePage({
               canShare={entitlements.publicSharing}
               canExportPdf={entitlements.pdfExport}
             />
-            <AgentToggleButton workspaceId={id} initialPrompt={typeof prompt === "string" ? prompt : undefined} />
+            <AgentToggleButton
+              workspaceId={id}
+              view={view}
+              initialPrompt={typeof prompt === "string" ? prompt : undefined}
+            />
           </div>
         </header>
 

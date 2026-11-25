@@ -117,6 +117,11 @@ export function AgentChatPanel({ chat, isReady }: { chat: WorkspaceAgentChat; is
                 Thinking...
               </p>
             )}
+            {!isReady && (
+              <p className="text-xs text-muted-foreground" role="status">
+                Waiting for the workspace editor to load...
+              </p>
+            )}
             {error && (
               <p className="rounded-md border border-white/10 bg-white/3 px-3 py-2 text-xs text-muted-foreground">
                 {error.message.includes(PROMPT_LIMIT_ERROR) ? (
@@ -131,7 +136,7 @@ export function AgentChatPanel({ chat, isReady }: { chat: WorkspaceAgentChat; is
                     </button>
                   </>
                 ) : (
-                  "Something went wrong. Try sending that again."
+                  error.message || "Agent request failed. Try sending that again."
                 )}
               </p>
             )}
